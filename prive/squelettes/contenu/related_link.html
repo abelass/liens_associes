@@ -1,0 +1,68 @@
+[(#AUTORISER{voir,related_link,#ID_RELATED_LINK}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{related_link}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{related_link}|objet_info{url_edit}})]
+<BOUCLE_related_link(RELATED_LINKS){id_related_link}{statut==.*}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,related_link,#ID_RELATED_LINK})
+		[(#ID_RELATED_LINK|afficher_qui_edite{related_link}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_related_link=#ID_RELATED_LINK}|icone_verticale{<:related_link:icone_modifier_related_link:>,related_link,edit,right ajax preload})]
+		]
+		[(#ID_RELATED_LINK|afficher_qui_edite{related_link}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_related_link=#ID_RELATED_LINK}|icone_verticale{#ID_RELATED_LINK|afficher_qui_edite{related_link},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{related_link-24.png}|balise_img{related_link,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{related_link,#ID_RELATED_LINK}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/related_link,id=#ID_RELATED_LINK,id_related_link=#ID_RELATED_LINK,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,related_link,#ID_RELATED_LINK})
+	[(#ID_RELATED_LINK|afficher_qui_edite{related_link}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_related_link=#ID_RELATED_LINK}|icone_verticale{<:related_link:icone_modifier_related_link:>,related_link,edit,right ajax preload})]
+	]
+	[(#ID_RELATED_LINK|afficher_qui_edite{related_link}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_related_link=#ID_RELATED_LINK}|icone_verticale{#ID_RELATED_LINK|afficher_qui_edite{related_link},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+<div class="liste">
+	<BOUCLE_objetslies(spip_related_links_liens){id_related_link}{0,1}><h3><:related_link:titre_objets_lies_related_link:></h3></BOUCLE_objetslies>
+
+	<BOUCLE_listeobjets(spip_related_links_liens){id_related_link}{fusion objet}{par objet}>
+		#SET{table,#OBJET|table_objet}
+		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_related_link]})]
+		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_related_link}})]
+		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_related_link,ajax,env} />
+	</BOUCLE_listeobjets>
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,related_link,id,#ID_RELATED_LINK},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/related_link-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/related_link-enfants,id_related_link,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,related_link,id_related_link,#ID_RELATED_LINK,objet,related_link,id_objet,#ID_RELATED_LINK},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_related_link>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_related_link>
