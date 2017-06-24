@@ -70,8 +70,8 @@ function formulaires_editer_related_link_identifier_dist($id_related_link = 'new
 function formulaires_editer_related_link_charger_dist($id_related_link = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('related_link', $id_related_link, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
-	if ($id_related_link == 'new') {
-		$valeurs['statut'] = 'publie';
+	if ($id_related_link == 'oui') {
+		$valeurs['_hidden'] .= '<input type="hidden" name="statut" value="publie"/>';
 	}
 	return $valeurs;
 }
