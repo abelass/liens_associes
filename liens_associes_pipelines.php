@@ -31,24 +31,24 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @return array       Données du pipeline
  */
 function liens_associes_affiche_milieu($flux) {
-	$texte = '';
+	include_spip('inc/config');
+	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
 
-
-
-	// related_links sur les articles, documents
-	if (!$e['edition'] and in_array($e['type'], array('article', 'document'))) {
-		$texte .= recuperer_fond('prive/objets/editer/liens', array(
-			'table_source' => 'related_links',
+	// bancaire_comptes sur les objets choisies
+	if (! $e['edition'] and in_array($e['table_objet_sql'], array_filter(lire_config('liens_associes/objets', array ())))) {
+		$texte .= recuperer_fond('prive/objets/editer/liens', array (
+			'table_source' => 'bancaire_comptes',
 			'objet' => $e['type'],
 			'id_objet' => $flux['args'][$e['id_table_objet']]
 		));
 	}
 
 	if ($texte) {
-		if ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
-			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
-		} else {
+		if ($p=strpos($flux['data'],"<!--affiche_milieu-->")) {
+			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
+		}
+		else {
 			$flux['data'] .= $texte;
 		}
 	}

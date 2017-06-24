@@ -8,11 +8,10 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
+	'label_lier_objets' => 'Associer des liens avec :',
 	'liens_associes_titre' => 'Liens associés',
 
 	// C
-	'cfg_exemple' => 'Exemple',
-	'cfg_exemple_explication' => 'Explication de cet exemple',
 	'cfg_titre_parametrages' => 'Paramétrages',
 
 	// T
