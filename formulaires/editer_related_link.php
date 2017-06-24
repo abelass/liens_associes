@@ -69,6 +69,10 @@ function formulaires_editer_related_link_identifier_dist($id_related_link = 'new
  */
 function formulaires_editer_related_link_charger_dist($id_related_link = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$valeurs = formulaires_editer_objet_charger('related_link', $id_related_link, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+
+	if ($id_related_link == 'new') {
+		$valeurs['statut'] = 'publie';
+	}
 	return $valeurs;
 }
 
@@ -139,9 +143,9 @@ function formulaires_editer_related_link_traiter_dist($id_related_link = 'new', 
 
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
-			
+
 			objet_associer(array('related_link' => $id_related_link), array($objet => $id_objet));
-			
+
 			if (isset($retours['redirect'])) {
 				$retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_related_link, '&');
 			}
