@@ -36,3 +36,38 @@
 	</div></form>
 	]
 </div>
+
+<script type="text/javascript">
+
+	function hide_field($field, $speed){
+		$($field).hide($speed);
+		$($field+' input').removeAttr('required');
+	}
+
+	function show_field($field){
+		$($field).show();
+		$($field+' input').prop('required','true');
+	}
+
+	if($("#champ_lien_interne").find("option:selected").val() != "") {
+		hide_field(".editer_objet");
+		hide_field(".editer_id_objet");
+	}
+	else {
+		hide_field(".editer_url", 800);
+	}
+
+	$(".editer_lien_interne")
+		.change(function() {
+			if($(this).find("option:selected").val() != "") {
+				hide_field(".editer_url",800);
+				show_field(".editer_objet");
+				show_field(".editer_id_objet");
+			}
+			else {
+				hide_field(".editer_objet", 800).hide_field(".editer_id_objet", 800);
+				show_field("editer_url")
+			}
+		});
+
+</script>
