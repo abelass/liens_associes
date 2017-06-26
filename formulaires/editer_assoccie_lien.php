@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion du formulaire de d'édition de related_link
+ * Gestion du formulaire de d'édition de assoccie_lien
  *
  * @plugin     Liens associés
  * @copyright  2017
@@ -20,48 +20,48 @@ include_spip('inc/editer');
 /**
  * Identifier le formulaire en faisant abstraction des paramètres qui ne représentent pas l'objet edité
  *
- * @param int|string $id_related_link
- *     Identifiant du related_link. 'new' pour un nouveau related_link.
+ * @param int|string $id_assoccie_lien
+ *     Identifiant du assoccie_lien. 'new' pour un nouveau assoccie_lien.
  * @param string $retour
  *     URL de redirection après le traitement
  * @param string $associer_objet
- *     Éventuel `objet|x` indiquant de lier le related_link créé à cet objet,
+ *     Éventuel `objet|x` indiquant de lier le assoccie_lien créé à cet objet,
  *     tel que `article|3`
  * @param int $lier_trad
- *     Identifiant éventuel d'un related_link source d'une traduction
+ *     Identifiant éventuel d'un assoccie_lien source d'une traduction
  * @param string $config_fonc
  *     Nom de la fonction ajoutant des configurations particulières au formulaire
  * @param array $row
- *     Valeurs de la ligne SQL du related_link, si connu
+ *     Valeurs de la ligne SQL du assoccie_lien, si connu
  * @param string $hidden
  *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  * @return string
  *     Hash du formulaire
  */
-function formulaires_editer_related_link_identifier_dist($id_related_link = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-	return serialize(array(intval($id_related_link), $associer_objet));
+function formulaires_editer_assoccie_lien_identifier_dist($id_assoccie_lien = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	return serialize(array(intval($id_assoccie_lien), $associer_objet));
 }
 
 /**
- * Chargement du formulaire d'édition de related_link
+ * Chargement du formulaire d'édition de assoccie_lien
  *
  * Déclarer les champs postés et y intégrer les valeurs par défaut
  *
  * @uses formulaires_editer_objet_charger()
  *
- * @param int|string $id_related_link
- *     Identifiant du related_link. 'new' pour un nouveau related_link.
+ * @param int|string $id_assoccie_lien
+ *     Identifiant du assoccie_lien. 'new' pour un nouveau assoccie_lien.
  * @param string $retour
  *     URL de redirection après le traitement
  * @param string $associer_objet
- *     Éventuel `objet|x` indiquant de lier le related_link créé à cet objet,
+ *     Éventuel `objet|x` indiquant de lier le assoccie_lien créé à cet objet,
  *     tel que `article|3`
  * @param int $lier_trad
- *     Identifiant éventuel d'un related_link source d'une traduction
+ *     Identifiant éventuel d'un assoccie_lien source d'une traduction
  * @param string $config_fonc
  *     Nom de la fonction ajoutant des configurations particulières au formulaire
  * @param array $row
- *     Valeurs de la ligne SQL du related_link, si connu
+ *     Valeurs de la ligne SQL du assoccie_lien, si connu
  * @param string $hidden
  *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  * @return array
@@ -77,77 +77,77 @@ function formulaires_editer_related_link_charger_dist($id_related_link = 'new', 
 }
 
 /**
- * Vérifications du formulaire d'édition de related_link
+ * Vérifications du formulaire d'édition de assoccie_lien
  *
  * Vérifier les champs postés et signaler d'éventuelles erreurs
  *
  * @uses formulaires_editer_objet_verifier()
  *
- * @param int|string $id_related_link
- *     Identifiant du related_link. 'new' pour un nouveau related_link.
+ * @param int|string $id_assoccie_lien
+ *     Identifiant du assoccie_lien. 'new' pour un nouveau assoccie_lien.
  * @param string $retour
  *     URL de redirection après le traitement
  * @param string $associer_objet
- *     Éventuel `objet|x` indiquant de lier le related_link créé à cet objet,
+ *     Éventuel `objet|x` indiquant de lier le assoccie_lien créé à cet objet,
  *     tel que `article|3`
  * @param int $lier_trad
- *     Identifiant éventuel d'un related_link source d'une traduction
+ *     Identifiant éventuel d'un assoccie_lien source d'une traduction
  * @param string $config_fonc
  *     Nom de la fonction ajoutant des configurations particulières au formulaire
  * @param array $row
- *     Valeurs de la ligne SQL du related_link, si connu
+ *     Valeurs de la ligne SQL du assoccie_lien, si connu
  * @param string $hidden
  *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  * @return array
  *     Tableau des erreurs
  */
-function formulaires_editer_related_link_verifier_dist($id_related_link = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+function formulaires_editer_assoccie_lien_verifier_dist($id_assoccie_lien = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
 	$erreurs = array();
 
-	$erreurs = formulaires_editer_objet_verifier('related_link', $id_related_link, array('titre', 'url'));
+	$erreurs = formulaires_editer_objet_verifier('assoccie_lien', $id_assoccie_lien, array('objet', 'titre'));
 
 	return $erreurs;
 }
 
 /**
- * Traitement du formulaire d'édition de related_link
+ * Traitement du formulaire d'édition de assoccie_lien
  *
  * Traiter les champs postés
  *
  * @uses formulaires_editer_objet_traiter()
  *
- * @param int|string $id_related_link
- *     Identifiant du related_link. 'new' pour un nouveau related_link.
+ * @param int|string $id_assoccie_lien
+ *     Identifiant du assoccie_lien. 'new' pour un nouveau assoccie_lien.
  * @param string $retour
  *     URL de redirection après le traitement
  * @param string $associer_objet
- *     Éventuel `objet|x` indiquant de lier le related_link créé à cet objet,
+ *     Éventuel `objet|x` indiquant de lier le assoccie_lien créé à cet objet,
  *     tel que `article|3`
  * @param int $lier_trad
- *     Identifiant éventuel d'un related_link source d'une traduction
+ *     Identifiant éventuel d'un assoccie_lien source d'une traduction
  * @param string $config_fonc
  *     Nom de la fonction ajoutant des configurations particulières au formulaire
  * @param array $row
- *     Valeurs de la ligne SQL du related_link, si connu
+ *     Valeurs de la ligne SQL du assoccie_lien, si connu
  * @param string $hidden
  *     Contenu HTML ajouté en même temps que les champs cachés du formulaire.
  * @return array
  *     Retours des traitements
  */
-function formulaires_editer_related_link_traiter_dist($id_related_link = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-	$retours = formulaires_editer_objet_traiter('related_link', $id_related_link, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+function formulaires_editer_assoccie_lien_traiter_dist($id_assoccie_lien = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
+	$retours = formulaires_editer_objet_traiter('assoccie_lien', $id_assoccie_lien, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
 	// Un lien a prendre en compte ?
-	if ($associer_objet and $id_related_link = $retours['id_related_link']) {
+	if ($associer_objet and $id_assoccie_lien = $retours['id_assoccie_lien']) {
 		list($objet, $id_objet) = explode('|', $associer_objet);
 
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
-
-			objet_associer(array('related_link' => $id_related_link), array($objet => $id_objet));
-
+			
+			objet_associer(array('assoccie_lien' => $id_assoccie_lien), array($objet => $id_objet));
+			
 			if (isset($retours['redirect'])) {
-				$retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_related_link, '&');
+				$retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_assoccie_lien, '&');
 			}
 		}
 	}

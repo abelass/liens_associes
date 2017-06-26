@@ -1,0 +1,30 @@
+<BOUCLE_assoccie_lien(ASSOCCIE_LIENS){id_assoccie_lien=#ENV{id}}{statut?}>
+<div class="infos">
+[(#SET{texte_objet,<:assoccie_lien:titre_assoccie_lien:>})]
+<div class="numero"><:titre_cadre_numero_objet{objet=#GET{texte_objet}}:><p>#ID_ASSOCCIE_LIEN</p></div>
+
+[(#FORMULAIRE_INSTITUER_OBJET{assoccie_liens,#ID_ASSOCCIE_LIEN})]
+
+<div class='nb_elements'><!--nb_elements--></div>
+
+[(#REM)
+
+	Bouton voir en ligne
+
+]
+<BOUCLE_publie(ASSOCCIE_LIENS){id_assoccie_lien}>
+	[(#VAL{redirect}
+		|generer_url_action{type=assoccie_liens&id=#ID_ASSOCCIE_LIEN}
+		|parametre_url{var_mode,calcul}
+		|icone_horizontale{<:icone_voir_en_ligne:>,racine})]
+</BOUCLE_publie>
+	[(#AUTORISER{previsualiser,assoccie_liens,#ID_ASSOCCIE_LIEN,'',#ARRAY{statut,#STATUT}})
+		[(#VAL{redirect}
+			|generer_url_action{type=assoccie_liens&id=#ID_ASSOCCIE_LIEN}
+			|parametre_url{var_mode,preview}
+			|icone_horizontale{<:previsualiser:>,preview})]
+	]
+<//B_publie>
+
+</div>
+</BOUCLE_assoccie_lien>

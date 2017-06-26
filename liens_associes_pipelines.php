@@ -45,10 +45,9 @@ function liens_associes_affiche_milieu($flux) {
 	}
 
 	if ($texte) {
-		if ($p=strpos($flux['data'],"<!--affiche_milieu-->")) {
-			$flux['data'] = substr_replace($flux['data'],$texte,$p,0);
-		}
-		else {
+		if ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
+			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
+		} else {
 			$flux['data'] .= $texte;
 		}
 	}
@@ -72,9 +71,9 @@ function liens_associes_affiche_milieu($flux) {
 function liens_associes_optimiser_base_disparus($flux) {
 
 	include_spip('action/editer_liens');
-	$flux['data'] += objet_optimiser_liens(array('related_link'=>'*'), '*');
+	$flux['data'] += objet_optimiser_liens(array('assoccie_lien'=>'*'), '*');
 
-	sql_delete('spip_related_links', "statut='poubelle' AND maj < " . $flux['args']['date']);
+	sql_delete('spip_assoccie_liens', "statut='poubelle' AND maj < " . $flux['args']['date']);
 
 	return $flux;
 }

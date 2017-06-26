@@ -9,7 +9,7 @@
 	schema="1.0.0" 
 >
 	<!--
-		Paquet généré le 2017-06-24 13:34:59
+		Paquet généré le 2017-06-26 15:11:02
 		(Vous pouvez bien entendu supprimer ces commentaires) 
 	-->
 
@@ -51,5 +51,5 @@
 	<pipeline nom="affiche_milieu" inclure="liens_associes_pipelines.php" /> 
 	<pipeline nom="optimiser_base_disparus" inclure="liens_associes_pipelines.php" /> 
 
-	<menu nom="related_links" titre="related_link:titre_related_links" parent="menu_edition" icone="images/related_link-16.png" action="related_links" /> 
+	<menu nom="assoccie_liens" titre="assoccie_lien:titre_assoccie_liens" parent="menu_edition" icone="images/assoccie_lien-16.png" action="assoccie_liens" /> 
 </paquet>

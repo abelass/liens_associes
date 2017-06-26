@@ -1,0 +1,38 @@
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_assoccie_lien,nouveau}'>
+	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
+
+	[(#ENV{editable})
+	<form method="post" action="#ENV{action}"><div>
+		#ACTION_FORMULAIRE{#ENV{action}}
+		<input type="hidden" name="id_assoccie_lien" value="#ENV{id_assoccie_lien}" />
+		<div class="editer-groupe">
+
+			[(#SAISIE{oui_non, lien_interne,
+				label=<:assoccie_lien:champ_lien_interne_label:>,
+				explication=<:assoccie_lien:champ_lien_interne_explication:> })]
+
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:assoccie_lien:champ_titre_label:>})]
+
+			[(#SAISIE{choisir_objets, objet, obligatoire=oui,
+				label=<:assoccie_lien:champ_objet_label:>,
+				explication=<:assoccie_lien:champ_objet_explication:> })]
+
+			[(#SAISIE{input, id_objet,
+				label=<:assoccie_lien:champ_id_objet_label:>})]
+
+			[(#SAISIE{input, url,
+				label=<:assoccie_lien:champ_url_label:>})]
+
+			[(#SAISIE{textarea, descriptif,
+				label=<:assoccie_lien:champ_descriptif_label:>,
+				conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4})]
+
+		</div>
+		[(#REM) ajouter les saisies supplementaires : extra et autre, a cet endroit ]
+		<!--extra-->
+		<p class="boutons"><input type="submit" class="submit" value="<:bouton_enregistrer:>" /></p>
+	</div></form>
+	]
+</div>

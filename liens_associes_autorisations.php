@@ -39,11 +39,11 @@ function autoriser_liens_associes_configurer_dist($faire, $type, $id, $qui, $opt
 */
 
 // -----------------
-// Objet related_links
+// Objet assoccie_liens
 
 
 /**
- * Autorisation de voir un élément de menu (relatedlinks)
+ * Autorisation de voir un élément de menu (assoccieliens)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -52,13 +52,13 @@ function autoriser_liens_associes_configurer_dist($faire, $type, $id, $qui, $opt
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_relatedlinks_menu_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_assoccieliens_menu_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
 
 /**
- * Autorisation de créer (relatedlink)
+ * Autorisation de créer (assoccielien)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -67,12 +67,12 @@ function autoriser_relatedlinks_menu_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_relatedlink_creer_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_assoccielien_creer_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
- * Autorisation de voir (relatedlink)
+ * Autorisation de voir (assoccielien)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -81,12 +81,12 @@ function autoriser_relatedlink_creer_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_relatedlink_voir_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_assoccielien_voir_dist($faire, $type, $id, $qui, $opt) {
 	return true;
 }
 
 /**
- * Autorisation de modifier (relatedlink)
+ * Autorisation de modifier (assoccielien)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -95,12 +95,12 @@ function autoriser_relatedlink_voir_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_relatedlink_modifier_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_assoccielien_modifier_dist($faire, $type, $id, $qui, $opt) {
 	return in_array($qui['statut'], array('0minirezo', '1comite'));
 }
 
 /**
- * Autorisation de supprimer (relatedlink)
+ * Autorisation de supprimer (assoccielien)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -109,14 +109,14 @@ function autoriser_relatedlink_modifier_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_relatedlink_supprimer_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_assoccielien_supprimer_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }
 
 
 
 /**
- * Autorisation de lier/délier l'élément (relatedlinks)
+ * Autorisation de lier/délier l'élément (assoccieliens)
  *
  * @param  string $faire Action demandée
  * @param  string $type  Type d'objet sur lequel appliquer l'action
@@ -125,6 +125,6 @@ function autoriser_relatedlink_supprimer_dist($faire, $type, $id, $qui, $opt) {
  * @param  array  $opt   Options de cette autorisation
  * @return bool          true s'il a le droit, false sinon
 **/
-function autoriser_associerrelatedlinks_dist($faire, $type, $id, $qui, $opt) {
+function autoriser_associerassoccieliens_dist($faire, $type, $id, $qui, $opt) {
 	return $qui['statut'] == '0minirezo' and !$qui['restreint'];
 }

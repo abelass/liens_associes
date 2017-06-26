@@ -1,8 +1,0 @@
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-
-<INCLURE{fond=prive/objets/liste/related_links, env, ajax, sinon=<:related_link:info_aucun_related_link:>}>
-
-[(#AUTORISER{creer,related_link})
-	[(#URL_ECRIRE{related_link_edit,new=oui}|icone_verticale{<:related_link:icone_creer_related_link:>,related_link,new,right})]
-]

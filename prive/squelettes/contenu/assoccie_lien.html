@@ -1,0 +1,68 @@
+[(#AUTORISER{voir,assoccie_lien,#ID_ASSOCCIE_LIEN}|sinon_interdire_acces)]
+[(#SET{url_voir,#VAL{assoccie_lien}|objet_info{url_voir}})]
+[(#SET{url_edit,#VAL{assoccie_lien}|objet_info{url_edit}})]
+<BOUCLE_assoccie_lien(ASSOCCIE_LIENS){id_assoccie_lien}{statut==.*}{si #ENV{exec}|=={#GET{url_voir}}}>
+[(#BOITE_OUVRIR{[
+	[(#AUTORISER{modifier,assoccie_lien,#ID_ASSOCCIE_LIEN})
+		[(#ID_ASSOCCIE_LIEN|afficher_qui_edite{assoccie_lien}|non)
+			[(#URL_ECRIRE{#GET{url_edit},id_assoccie_lien=#ID_ASSOCCIE_LIEN}|icone_verticale{<:assoccie_lien:icone_modifier_assoccie_lien:>,assoccie_lien,edit,right ajax preload})]
+		]
+		[(#ID_ASSOCCIE_LIEN|afficher_qui_edite{assoccie_lien}|oui)
+			[(#URL_ECRIRE{#GET{url_edit},id_assoccie_lien=#ID_ASSOCCIE_LIEN}|icone_verticale{#ID_ASSOCCIE_LIEN|afficher_qui_edite{assoccie_lien},warning-24,'',right edition_deja ajax preload})]
+		]
+	]
+
+	<h1>[(#RANG). ](#TITRE|sinon{<:info_sans_titre:>})[(#CHEMIN_IMAGE{assoccie_lien-24.png}|balise_img{assoccie_lien,cadre-icone})]</h1>
+
+],simple fiche_objet})]
+
+<div class="ajax">
+	#FORMULAIRE_DATER{assoccie_lien,#ID_ASSOCCIE_LIEN}
+</div>
+
+<!--affiche_milieu-->
+
+<div id="wysiwyg">
+<INCLURE{fond=prive/objets/contenu/assoccie_lien,id=#ID_ASSOCCIE_LIEN,id_assoccie_lien=#ID_ASSOCCIE_LIEN,virtuel=oui,ajax=wysiwyg,wysiwyg=1}>
+</div>
+
+<div class="nettoyeur"></div>
+
+[(#AUTORISER{modifier,assoccie_lien,#ID_ASSOCCIE_LIEN})
+	[(#ID_ASSOCCIE_LIEN|afficher_qui_edite{assoccie_lien}|non)
+		[(#URL_ECRIRE{#GET{url_edit},id_assoccie_lien=#ID_ASSOCCIE_LIEN}|icone_verticale{<:assoccie_lien:icone_modifier_assoccie_lien:>,assoccie_lien,edit,right ajax preload})]
+	]
+	[(#ID_ASSOCCIE_LIEN|afficher_qui_edite{assoccie_lien}|oui)
+		[(#URL_ECRIRE{#GET{url_edit},id_assoccie_lien=#ID_ASSOCCIE_LIEN}|icone_verticale{#ID_ASSOCCIE_LIEN|afficher_qui_edite{assoccie_lien},warning-24,'',right edition_deja ajax preload})]
+	]
+]
+
+<div class="nettoyeur"></div>
+<div class="liste">
+	<BOUCLE_objetslies(spip_assoccie_liens_liens){id_assoccie_lien}{0,1}><h3><:assoccie_lien:titre_objets_lies_assoccie_lien:></h3></BOUCLE_objetslies>
+
+	<BOUCLE_listeobjets(spip_assoccie_liens_liens){id_assoccie_lien}{fusion objet}{par objet}>
+		#SET{table,#OBJET|table_objet}
+		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_assoccie_lien]})]
+		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_assoccie_lien}})]
+		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_assoccie_lien,ajax,env} />
+	</BOUCLE_listeobjets>
+</div>
+
+#PIPELINE{afficher_complement_objet,#ARRAY{args,#ARRAY{type,assoccie_lien,id,#ID_ASSOCCIE_LIEN},data,'<div class="nettoyeur"></div>'}}
+
+#BOITE_FERMER
+
+
+#SET{enfants,''}
+[(#VAL{prive/objets/contenu/assoccie_lien-enfants}|trouver_fond|oui)
+	[(#SET{enfants,[(#INCLURE{fond=prive/objets/contenu/assoccie_lien-enfants,id_assoccie_lien,env})]})]
+]
+[(#PIPELINE{affiche_enfants,[(#ARRAY{args,#ARRAY{exec,assoccie_lien,id_assoccie_lien,#ID_ASSOCCIE_LIEN,objet,assoccie_lien,id_objet,#ID_ASSOCCIE_LIEN},data,#GET{enfants}})]})]
+
+[(#EVAL{_AJAX}|oui)
+	<script type="text/javascript">/*<!\\[CDATA\\[*/reloadExecPage('#ENV{exec}','#navigation,#chemin,#extra');/*\\]\\]>*/</script>
+]
+</BOUCLE_assoccie_lien>
+[(#ENV**{exec}|=={#GET{url_edit}}|?{#INCLURE{fond=prive/squelettes/contenu/#GET{url_edit},redirect='',env,retourajax=oui},#REM|sinon_interdire_acces})]
+<//B_assoccie_lien>

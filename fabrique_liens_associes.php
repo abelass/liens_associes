@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v6
- *   le 2017-06-24 13:34:59
+ *   le 2017-06-26 15:11:02
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -95,13 +95,44 @@ $data = array (
         12 => '',
       ),
       'logo_variantes' => 'on',
-      'table' => 'spip_related_links',
-      'cle_primaire' => 'id_related_link',
+      'table' => 'spip_assoccie_liens',
+      'cle_primaire' => 'id_assoccie_lien',
       'cle_primaire_sql' => 'bigint(21) NOT NULL',
-      'table_type' => 'related_link',
+      'table_type' => 'assoccie_lien',
       'champs' => 
       array (
         0 => 
+        array (
+          'nom' => 'Lien interne',
+          'champ' => 'lien_interne',
+          'sql' => 'int(1) NOT NULL DEFAULT 0',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'oui_non',
+          'explication' => 'S\'agit-il d\'un lien du même site (lien interne) ou non.',
+          'saisie_options' => '',
+        ),
+        1 => 
+        array (
+          'nom' => 'Objet',
+          'champ' => 'objet',
+          'sql' => 'varchar(55) NOT NULL DEFAULT \'\'',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+            2 => 'obligatoire',
+          ),
+          'recherche' => '',
+          'saisie' => 'choisir_objets',
+          'explication' => 'Type de contenu',
+          'saisie_options' => '',
+        ),
+        2 => 
         array (
           'nom' => 'Titre',
           'champ' => 'titre',
@@ -117,7 +148,7 @@ $data = array (
           'explication' => '',
           'saisie_options' => '',
         ),
-        1 => 
+        3 => 
         array (
           'nom' => 'URL',
           'champ' => 'url',
@@ -126,14 +157,13 @@ $data = array (
           array (
             0 => 'editable',
             1 => 'versionne',
-            2 => 'obligatoire',
           ),
           'recherche' => '5',
           'saisie' => 'input',
           'explication' => '',
           'saisie_options' => '',
         ),
-        2 => 
+        4 => 
         array (
           'nom' => 'Déscriptif',
           'champ' => 'descriptif',
@@ -147,6 +177,21 @@ $data = array (
           'saisie' => 'textarea',
           'explication' => '',
           'saisie_options' => 'conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4',
+        ),
+        5 => 
+        array (
+          'nom' => 'Titre ',
+          'champ' => 'id_objet',
+          'sql' => 'bigint(21) NOT NULL DEFAULT 0',
+          'caracteristiques' => 
+          array (
+            0 => 'editable',
+            1 => 'versionne',
+          ),
+          'recherche' => '',
+          'saisie' => 'input',
+          'explication' => '',
+          'saisie_options' => '',
         ),
       ),
       'champ_titre' => 'titre',

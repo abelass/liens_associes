@@ -25,7 +25,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  */
 function liens_associes_declarer_tables_interfaces($interfaces) {
 
-	$interfaces['table_des_tables']['related_links'] = 'related_links';
+	$interfaces['table_des_tables']['assoccie_liens'] = 'assoccie_liens';
 
 	return $interfaces;
 }
@@ -42,13 +42,16 @@ function liens_associes_declarer_tables_interfaces($interfaces) {
  */
 function liens_associes_declarer_tables_objets_sql($tables) {
 
-	$tables['spip_related_links'] = array(
-		'type' => 'related_link',
+	$tables['spip_assoccie_liens'] = array(
+		'type' => 'assoccie_lien',
 		'principale' => 'oui',
-		'table_objet_surnoms' => array('relatedlink'), // table_objet('related_link') => 'related_links' 
+		'table_objet_surnoms' => array('assoccielien'), // table_objet('assoccie_lien') => 'assoccie_liens'
 		'field'=> array(
-			'id_related_link'    => 'bigint(21) NOT NULL',
+			'id_assoccie_lien'   => 'bigint(21) NOT NULL',
 			'titre'              => 'varchar(255) NOT NULL DEFAULT ""',
+			'lien_interne'       => 'int(1) NOT NULL DEFAULT 0',
+			'objet'              => 'varchar(55) NOT NULL DEFAULT ""',
+			'id_objet'           => 'bigint(21) NOT NULL DEFAULT 0',
 			'url'                => 'varchar(255) NOT NULL DEFAULT ""',
 			'descriptif'         => 'text NOT NULL DEFAULT ""',
 			'date'               => 'datetime NOT NULL DEFAULT "0000-00-00 00:00:00"',
@@ -56,15 +59,15 @@ function liens_associes_declarer_tables_objets_sql($tables) {
 			'maj'                => 'TIMESTAMP'
 		),
 		'key' => array(
-			'PRIMARY KEY'        => 'id_related_link',
-			'KEY statut'         => 'statut',
+			'PRIMARY KEY'        => 'id_assoccie_lien',
+			'KEY statut'         => 'statut,objet,id_objet',
 		),
 		'titre' => 'titre AS titre, "" AS lang',
 		'date' => 'date',
-		'champs_editables'  => array('titre', 'url', 'descriptif'),
-		'champs_versionnes' => array('titre', 'url', 'descriptif'),
+		'champs_editables'  => array('lien_interne', 'objet', 'titre', 'url', 'descriptif', 'id_objet'),
+		'champs_versionnes' => array('lien_interne', 'objet', 'titre', 'url', 'descriptif', 'id_objet'),
 		'rechercher_champs' => array("titre" => 10, "url" => 5, "descriptif" => 6),
-		'tables_jointures'  => array('spip_related_links_liens'),
+		'tables_jointures'  => array('spip_assoccie_liens_liens'),
 		'statut_textes_instituer' => array(
 			'prepa'    => 'texte_statut_en_cours_redaction',
 			'prop'     => 'texte_statut_propose_evaluation',
@@ -81,7 +84,7 @@ function liens_associes_declarer_tables_objets_sql($tables) {
 				'exception' => array('statut','tout')
 			)
 		),
-		'texte_changer_statut' => 'related_link:texte_changer_statut_related_link',
+		'texte_changer_statut' => 'assoccie_lien:texte_changer_statut_assoccie_lien',
 
 
 	);
@@ -101,16 +104,16 @@ function liens_associes_declarer_tables_objets_sql($tables) {
  */
 function liens_associes_declarer_tables_auxiliaires($tables) {
 
-	$tables['spip_related_links_liens'] = array(
+	$tables['spip_assoccie_liens_liens'] = array(
 		'field' => array(
-			'id_related_link'    => 'bigint(21) DEFAULT "0" NOT NULL',
+			'id_assoccie_lien'   => 'bigint(21) DEFAULT "0" NOT NULL',
 			'id_objet'           => 'bigint(21) DEFAULT "0" NOT NULL',
 			'objet'              => 'VARCHAR(25) DEFAULT "" NOT NULL',
 			'vu'                 => 'VARCHAR(6) DEFAULT "non" NOT NULL',
 		),
 		'key' => array(
-			'PRIMARY KEY'        => 'id_related_link,id_objet,objet',
-			'KEY id_related_link' => 'id_related_link',
+			'PRIMARY KEY'        => 'id_assoccie_lien,id_objet,objet',
+			'KEY id_assoccie_lien' => 'id_assoccie_lien',
 		)
 	);
 

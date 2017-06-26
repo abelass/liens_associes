@@ -1,20 +1,20 @@
 [(#SET{defaut_tri,#ARRAY{
 	multi titre,1,
 	date,-1,
-	id_related_link,1
+	id_assoccie_lien,1
 }})
 ]
 #SET{exclus,#ENV**{exclus,#ENV{objet_source}|lister_objets_lies{#ENV{objet},#ENV{id_objet},#ENV{_objet_lien}}}}
-#SET{debut,#ENV{debutrela,#EVAL{_request("debutrela");}}}
-<B_liste_related_links>
+#SET{debut,#ENV{debutassa,#EVAL{_request("debutassa");}}}
+<B_liste_assoccie_liens>
 [(#REM) En cas de pagination indirecte @32, il faut refaire le set car la boucle
 a mis a jour la valeur avec la page reelle]
-#SET{debut,#ENV{debutrela,#EVAL{_request("debutrela");}}}
+#SET{debut,#ENV{debutassa,#EVAL{_request("debutassa");}}}
 #SET{afficher_lettres,#TRI|=={'multi titre'}|oui}
 #ANCRE_PAGINATION
-<div class="liste-objets liste-objets-associer related_links">
+<div class="liste-objets liste-objets-associer assoccie_liens">
 <table class="spip liste">
-[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{related_link:info_1_related_link,related_link:info_nb_related_links}})</strong>
+[<caption><span class="caption"><strong>(#ENV*{titre,#GRAND_TOTAL|singulier_ou_pluriel{assoccie_lien:info_1_assoccie_lien,assoccie_lien:info_nb_assoccie_liens}})</strong>
 <span class="recherche">
 	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
 	<input type="text" class="recherche" name="recherche" id="recherche-#ENV{id}" value="#ENV{recherche}" />
@@ -24,11 +24,11 @@ a mis a jour la valeur avec la page reelle]
 </caption>]
 	<thead>
 		#SET{p,''}
-		<BOUCLE_lettre(RELATED_LINKS){tout}{!id_related_link IN #GET{exclus}}{where?}{recherche?}{statut?}
-			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_related_link==#GET{afficher_lettres}|?{'.*','A'}}>[
+		<BOUCLE_lettre(ASSOCCIE_LIENS){tout}{!id_assoccie_lien IN #GET{exclus}}{where?}{recherche?}{statut?}
+			{tri #ENV{par,multi titre},#GET{defaut_tri}}{id_assoccie_lien==#GET{afficher_lettres}|?{'.*','A'}}>[
 		(#TITRE**|extraire_multi|initiale|unique|oui)
 		[(#SET{p,#GET{p}|concat{
-		#SELF|parametre_url{debutrela,@#ID_RELATED_LINK}|ancre_url{paginationrela}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
+		#SELF|parametre_url{debutassa,@#ID_ASSOCCIE_LIEN}|ancre_url{paginationassa}|afficher_initiale{#TITRE**|extraire_multi|initiale{},#COMPTEUR_BOUCLE,#GET{debut},#ENV{nb,10}}
 		}})]
 		]#SAUTER{#ENV{nb,10}|moins{#COMPTEUR_BOUCLE|=={1}|?{2,1}}}</BOUCLE_lettre>[
 		(#SET{p,
@@ -40,27 +40,27 @@ a mis a jour la valeur avec la page reelle]
 	
 		<tr class="first_row">
 			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
-			<th class="titre" scope="col">[(#TRI{multi titre,<:related_link:champ_titre_label:>,ajax})]</th>
+			<th class="titre" scope="col">[(#TRI{multi titre,<:assoccie_lien:champ_titre_label:>,ajax})]</th>
 			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
 	<tbody>
-	<BOUCLE_liste_related_links(RELATED_LINKS){!id_related_link IN #GET{exclus}}{where?}{recherche?}{statut?}
-		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} rela}>
+	<BOUCLE_liste_assoccie_liens(ASSOCCIE_LIENS){!id_assoccie_lien IN #GET{exclus}}{where?}{recherche?}{statut?}
+		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} assa}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)]">
-			<td class="statut">[(#STATUT|puce_statut{related_link})]</td> 
-			<td class="titre">[(#LOGO_RELATED_LINK|image_reduire{20,20})]<a href="[(#ID_RELATED_LINK|generer_url_entite{related_link})]">#TITRE</a></td>
+			<td class="statut">[(#STATUT|puce_statut{assoccie_lien})]</td> 
+			<td class="titre">[(#LOGO_ASSOCCIE_LIEN|image_reduire{20,20})]<a href="[(#ID_ASSOCCIE_LIEN|generer_url_entite{assoccie_lien})]">#TITRE</a></td>
 			<td class="action">
-				<button type="submit" class="button link add" name="ajouter_lien\[related_link-#ID_RELATED_LINK-#OBJET-#ID_OBJET\]" value="+"><:related_link:ajouter_lien_related_link:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
+				<button type="submit" class="button link add" name="ajouter_lien\[assoccie_lien-#ID_ASSOCCIE_LIEN-#OBJET-#ID_OBJET\]" value="+"><:assoccie_lien:ajouter_lien_assoccie_lien:> [(#CHEMIN_IMAGE{ajouter-12.png}|balise_img{'+'})]</button>
 			</td>
 		</tr>
-	</BOUCLE_liste_related_links>
+	</BOUCLE_liste_assoccie_liens>
 	</tbody>
 </table>
 [<p class="pagination">(#PAGINATION{prive})</p>]
 </div>
-</B_liste_related_links>[(#ENV{recherche}|oui)
-<div class="liste-objets liste-objets-associer related_links caption-wrap">
+</B_liste_assoccie_liens>[(#ENV{recherche}|oui)
+<div class="liste-objets liste-objets-associer assoccie_liens caption-wrap">
 <span class="caption"><strong>[(#VAL{info_recherche_auteur_zero}|_T{#ARRAY{cherche_auteur,#ENV{recherche}}})]</strong>
 <span class="recherche">
 	<label for="recherche-#ENV{id}"><:info_rechercher_02:></label>
@@ -69,4 +69,4 @@ a mis a jour la valeur avec la page reelle]
 </span>
 </span>
 </div>
-]<//B_liste_related_links>
+]<//B_liste_assoccie_liens>

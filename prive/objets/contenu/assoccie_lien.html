@@ -1,0 +1,32 @@
+<BOUCLE_assoccie_lien(ASSOCCIE_LIENS){id_assoccie_lien}{statut?}>
+[<div class="champ contenu_lien_interne[ (#LIEN_INTERNE*|strlen|?{'',vide})]">
+	<label><:assoccie_lien:champ_lien_interne_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{lien_interne} lien_interne">(#LIEN_INTERNE)</span>
+</div>]
+
+[<div class="champ contenu_objet[ (#OBJET*|strlen|?{'',vide})]">
+	<label><:assoccie_lien:champ_objet_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{objet} objet">(#OBJET)</span>
+</div>]
+
+[<div class="champ contenu_titre[ (#TITRE*|strlen|?{'',vide})]">
+	<label><:assoccie_lien:champ_titre_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{titre} titre">(#TITRE)</span>
+</div>]
+
+[<div class="champ contenu_url[ (#URL*|strlen|?{'',vide})]">
+	<label><:assoccie_lien:champ_url_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{url} url">(#URL)</span>
+</div>]
+
+[<div class="champ contenu_descriptif[ (#DESCRIPTIF*|strlen|?{'',vide})]">
+	<label><:assoccie_lien:champ_descriptif_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{descriptif} descriptif">(#DESCRIPTIF)</span>
+</div>]
+
+[<div class="champ contenu_id_objet[ (#ID_OBJET*|strlen|?{'',vide})]">
+	<label><:assoccie_lien:champ_id_objet_label:> : </label>
+	<span dir="#LANG_DIR" class="#EDIT{id_objet} id_objet">(#ID_OBJET)</span>
+</div>]
+
+</BOUCLE_assoccie_lien>
