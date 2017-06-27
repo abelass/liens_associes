@@ -38,7 +38,7 @@ function liens_associes_affiche_milieu($flux) {
 	// bancaire_comptes sur les objets choisies
 	if (! $e['edition'] and in_array($e['table_objet_sql'], array_filter(lire_config('liens_associes/objets', array ())))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array (
-			'table_source' => 'related_links',
+			'table_source' => 'associe_liens',
 			'objet' => $e['type'],
 			'id_objet' => $flux['args'][$e['id_table_objet']]
 		));
