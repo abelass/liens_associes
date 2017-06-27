@@ -15,7 +15,7 @@
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:assoccie_lien:champ_titre_label:>})]
 
-			[(#SAISIE{choisir_objets, objet,
+			[(#SAISIE{choisir_objet, objet,
 				label=<:assoccie_lien:champ_objet_label:>,
 				explication=<:assoccie_lien:champ_objet_explication:> })]
 
@@ -38,8 +38,6 @@
 </div>
 
 <script type="text/javascript">
-	obligatoire = '<span class="obligatoire"> (<:info_obligatoire_02:>)</span>'
-
 	if($('input:radio[name="lien_interne"]').val() != '') {
 		hide_field([".editer_objet",".editer_id_objet"]);
 		show_field([".editer_url"]);
@@ -69,6 +67,7 @@
 			$(field).hide(speed);
 			$(field +' input').removeAttr('required');
 			$(field + ' > label span').replaceWith('');
+			$(field).removeClass('obligatoire');
 		});
 	}
 
@@ -77,7 +76,8 @@
 		jQuery.each(fields, function(index, field) {
 			$(field).show(speed);
 			$(field +' input').prop('required','true');
-			$(field + ' > label').append('<span class="obligatoire"> (obligatoire)</span>');
+			$(field + ' > label').append('<span class="obligatoire"> <:info_obligatoire_02:></span>');
+			$(field).addClass('obligatoire');
 		});
 	}
 
