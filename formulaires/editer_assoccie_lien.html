@@ -15,7 +15,7 @@
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:assoccie_lien:champ_titre_label:>})]
 
-			[(#SAISIE{choisir_objets, objet, obligatoire=oui,
+			[(#SAISIE{choisir_objets, objet,
 				label=<:assoccie_lien:champ_objet_label:>,
 				explication=<:assoccie_lien:champ_objet_explication:> })]
 
@@ -39,35 +39,48 @@
 
 <script type="text/javascript">
 
-	function hide_field($field, $speed){
-		$($field).hide($speed);
-		$($field+' input').removeAttr('required');
-	}
 
-	function show_field($field){
-		$($field).show();
-		$($field+' input').prop('required','true');
-	}
-
-	if($("#champ_lien_interne").find("option:selected").val() != "") {
-		hide_field(".editer_objet");
-		hide_field(".editer_id_objet");
+	if($('input:radio[name="lien_interne"]').val() != '') {
+		hide_field([".editer_objet",".editer_id_objet"]);
+		show_field([".editer_url"]);
 	}
 	else {
-		hide_field(".editer_url", 800);
+		hide_field([".editer_url"]);
+		show_field([".editer_objet",".editer_id_objet"]);
 	}
 
-	$(".editer_lien_interne")
-		.change(function() {
-			if($(this).find("option:selected").val() != "") {
-				hide_field(".editer_url",800);
-				show_field(".editer_objet");
-				show_field(".editer_id_objet");
-			}
-			else {
-				hide_field(".editer_objet", 800).hide_field(".editer_id_objet", 800);
-				show_field("editer_url")
-			}
+	$('input:radio[name="lien_interne"]').change(
+		function(){
+				if ($(this).val() == '') {
+					hide_field([".editer_objet",".editer_id_objet"]);
+					show_field([".editer_url"]);
+				}
+				else {
+					hide_field([".editer_url"]);
+					show_field([".editer_objet",".editer_id_objet"]);
+				}
+		}
+	);
+
+	function hide_field(fields, speed){
+		speed = speed || 800;
+
+		jQuery.each(fields, function(index, field) {
+			$(field).hide(speed);
+			$(field +' input').removeAttr('required');
+			$(field + ' > label span').replaceWith('');
 		});
+	}
+
+	function show_field(fields, speed){
+		speed = speed || 800;
+		jQuery.each(fields, function(index, field) {
+			$(field).show(speed);
+			$(field +' input').prop('required','true');
+			$(field + ' > label').append('<span class="obligatoire"> (obligatoire)</span>');
+		});
+	}
+
+
 
 </script>
