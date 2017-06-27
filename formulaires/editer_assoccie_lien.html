@@ -38,6 +38,8 @@
 </div>
 
 <script type="text/javascript">
+
+	// Show hide fields
 	if($('input:radio[name="lien_interne"]').val() != '') {
 		hide_field([".editer_objet",".editer_id_objet"]);
 		show_field([".editer_url"]);
@@ -81,6 +83,25 @@
 		});
 	}
 
-
+	// Autocomplete search internal links.
+	$(function() {
+		var url = '#URL_PAGE{la_recherche_objet}'
+		var objet = $("#champ_objet option:selected").val();
+		console.log(objet);
+		$(".formulaire_editer_assoccie_lien #champ_id_objet").autocomplete({
+				source: parametre_url(url, 'table', objet, '&'),
+				dataType: 'json',
+				minLength: 2,
+				autoFocus: true,
+				select: function(event, ui) {
+					//assign value back to the form element
+					if(ui.item){
+						$(event.target).val(ui.item.value);
+					}
+					//submit the form
+					$(event.target.form).submit();
+				}
+			});
+		});
 
 </script>

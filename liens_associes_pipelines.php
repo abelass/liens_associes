@@ -55,7 +55,17 @@ function liens_associes_affiche_milieu($flux) {
 	return $flux;
 }
 
+/**
+ * Appel de la pipeline jqueryui_plugins
+ */
 
+function liens_associes_jqueryui_plugins($scripts){
+	if (_request('exec')) {
+		$scripts[] = "jquery.ui.autocomplete";
+	}
+
+	return $scripts;
+}
 
 
 /**
