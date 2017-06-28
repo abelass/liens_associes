@@ -68,7 +68,7 @@ function formulaires_editer_assoccie_lien_identifier_dist($id_assoccie_lien = 'n
  *     Environnement du formulaire
  */
 function formulaires_editer_related_link_charger_dist($id_related_link = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-	$valeurs = formulaires_editer_objet_charger('related_link', $id_related_link, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
+	$valeurs = formulaires_editer_objet_charger('assoccie_lien', $id_related_link, '', $lier_trad, $retour, $config_fonc, $row, $hidden);
 
 	if ($id_related_link == 'oui') {
 		$valeurs['_hidden'] .= '<input type="hidden" name="statut" value="publie"/>';
@@ -143,9 +143,9 @@ function formulaires_editer_assoccie_lien_traiter_dist($id_assoccie_lien = 'new'
 
 		if ($objet and $id_objet and autoriser('modifier', $objet, $id_objet)) {
 			include_spip('action/editer_liens');
-			
+
 			objet_associer(array('assoccie_lien' => $id_assoccie_lien), array($objet => $id_objet));
-			
+
 			if (isset($retours['redirect'])) {
 				$retours['redirect'] = parametre_url($retours['redirect'], 'id_lien_ajoute', $id_assoccie_lien, '&');
 			}
