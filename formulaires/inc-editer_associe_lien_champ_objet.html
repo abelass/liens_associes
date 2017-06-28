@@ -1,0 +1,22 @@
+[(#SAISIE{input, id_objet, obligatoire=#ENV{obligatoire},
+	label=<:assoccie_lien:champ_id_objet_label:>})]
+
+<script type="text/javascript">
+	// Autocomplete search internal links.
+	var url = '#URL_PAGE{la_recherche_objet}'
+
+	$(".formulaire_editer_assoccie_lien #champ_id_objet").autocomplete({
+			source: parametre_url(url, 'table', '#OBJET', '&'),
+			dataType: 'json',
+			minLength: 2,
+			autoFocus: true,
+			select: function(event, ui) {
+				//assign value back to the form element
+				if(ui.item){
+					$(event.target).val(ui.item.value);
+				}
+				//submit the form
+				$(event.target.form).submit();
+			}
+	});
+</script>
