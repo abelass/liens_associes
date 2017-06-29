@@ -14,8 +14,11 @@
 			minLength: 2,
 			autoFocus: true,
 			select: function(event, ui) {
+				// Afficher l'id dans le champ
 				event.preventDefault();
 				$(event.target).val(ui.item.data);
+
+				// Préremplir le tire avec le label/titre
 				$('#champ_titre').val(ui.item.label)
 			},
 	});
