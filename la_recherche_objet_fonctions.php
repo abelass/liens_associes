@@ -21,7 +21,7 @@ function la_recherche_objets($table) {
 	while ($data = sql_fetch($sql)) {
 		$objets[] = array(
 			'label' => $data[$champ_titre],
-			'data' => [$data[$id_table]],
+			'data' => $data[$id_table],
 			);
 	}
 
