@@ -1,8 +1,0 @@
-#FORMULAIRE_RECHERCHE_ECRIRE{#SELF,ajax}
-<div class="nettoyeur"></div>
-
-<INCLURE{fond=prive/objets/liste/assoccie_liens, env, ajax, sinon=<:assoccie_lien:info_aucun_assoccie_lien:>}>
-
-[(#AUTORISER{creer,assoccie_lien})
-	[(#URL_ECRIRE{assoccie_lien_edit,new=oui}|icone_verticale{<:assoccie_lien:icone_creer_assoccie_lien:>,assoccie_lien,new,right})]
-]

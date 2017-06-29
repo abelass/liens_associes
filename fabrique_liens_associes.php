@@ -2,7 +2,7 @@
 
 /**
  *  Fichier généré par la Fabrique de plugin v6
- *   le 2017-06-26 15:11:02
+ *   le 2017-06-28 16:27:50
  *
  *  Ce fichier de sauvegarde peut servir à recréer
  *  votre plugin avec le plugin «Fabrique» qui a servi à le créer.
@@ -95,10 +95,10 @@ $data = array (
         12 => '',
       ),
       'logo_variantes' => 'on',
-      'table' => 'spip_assoccie_liens',
-      'cle_primaire' => 'id_assoccie_lien',
+      'table' => 'spip_associe_liens',
+      'cle_primaire' => 'id_associe_lien',
       'cle_primaire_sql' => 'bigint(21) NOT NULL',
-      'table_type' => 'assoccie_lien',
+      'table_type' => 'associe_lien',
       'champs' => 
       array (
         0 => 

@@ -1,13 +1,13 @@
 [(#ENV{objet}|et{#ENV{lien_interne}}|oui)
 	[(#SAISIE{input, id_objet, obligatoire=oui,
-		label=<:assoccie_lien:champ_id_objet_label:>})]
+		label=<:associe_lien:champ_id_objet_label:>})]
 ]
 
 <script type="text/javascript">
 	// Autocomplete search internal links.
 	var url = '#URL_PAGE{la_recherche_objet}'
 
-	$(".formulaire_editer_assoccie_lien #champ_id_objet").autocomplete({
+	$(".formulaire_editer_associe_lien #champ_id_objet").autocomplete({
 			source: parametre_url(url, 'table', '#ENV{objet}', '&'),
 			dataType: 'json',
 			minLength: 2,
@@ -16,9 +16,9 @@
 				//assign value back to the form element
 				if(ui.item){
 					$(event.target).val(ui.item.value);
+					$('#champ_titre').val(ui.item.label)
 				}
-				//submit the form
-				$(event.target.form).submit();
+
 			}
 	});
 </script>

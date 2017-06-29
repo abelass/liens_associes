@@ -1,31 +1,31 @@
-<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_assoccie_lien,nouveau}'>
+<div class='formulaire_spip formulaire_editer formulaire_#FORM formulaire_#FORM-#ENV{id_associe_lien,nouveau}'>
 	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV**{message_ok})</p>]
 	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-
 	[(#ENV{editable})
 	<form method="post" action="#ENV{action}"><div>
 		#ACTION_FORMULAIRE{#ENV{action}}
-		<input type="hidden" name="id_assoccie_lien" value="#ENV{id_assoccie_lien}" />
+		<input type="hidden" name="id_associe_lien" value="#ENV{id_associe_lien}" />
 		<div class="editer-groupe">
 
 			[(#SAISIE{oui_non, lien_interne,
-				label=<:assoccie_lien:champ_lien_interne_label:>,
-				explication=<:assoccie_lien:champ_lien_interne_explication:> })]
-
-			[(#SAISIE{input, titre, obligatoire=oui,
-				label=<:assoccie_lien:champ_titre_label:>})]
+				label=<:associe_lien:champ_lien_interne_label:>,
+				explication=<:associe_lien:champ_lien_interne_explication:> })]
 
 			[(#SAISIE{choisir_objet, objet,
-				label=<:assoccie_lien:champ_objet_label:>,
-				explication=<:assoccie_lien:champ_objet_explication:> })]
+				label=<:associe_lien:champ_objet_label:>,
+				explication=<:associe_lien:champ_objet_explication:> })]
 
 			<INCLURE{fond=formulaires/inc-editer_associe_lien_champ_objet,ajax=champ_objet,env}/>
 
+			[(#SAISIE{input, titre, obligatoire=oui,
+				label=<:associe_lien:champ_titre_label:>})]
+
+
 			[(#SAISIE{input, url,
-				label=<:assoccie_lien:champ_url_label:>})]
+				label=<:associe_lien:champ_url_label:>})]
 
 			[(#SAISIE{textarea, descriptif,
-				label=<:assoccie_lien:champ_descriptif_label:>,
+				label=<:associe_lien:champ_descriptif_label:>,
 				conteneur_class=pleine_largeur, class=inserer_barre_edition, rows=4})]
 
 		</div>
