@@ -1,6 +1,7 @@
 [(#ENV{objet}|et{#ENV{lien_interne}}|oui)
 	[(#SAISIE{input, id_objet, obligatoire=oui,
-		label=<:associe_lien:champ_id_objet_label:>})]
+		label=<:associe_lien:champ_id_objet_label:>,
+		explication=<:associe_lien:champ_id_objet_label_explication:>})]
 ]
 
 <script type="text/javascript">
@@ -14,13 +15,8 @@
 			autoFocus: true,
 			select: function(event, ui) {
 				event.preventDefault();
-				$('#champ_id_objet').val(ui.item.data);
+				$(event.target).val(ui.item.data);
 				$('#champ_titre').val(ui.item.label)
 			},
-			focus: function(event, ui) {
-				event.preventDefault();
-				$("#customer-search").val(ui.item.data);
-		}
-
 	});
 </script>
