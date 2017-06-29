@@ -83,7 +83,8 @@
 	// Changement de l'objet.
 	$('select[name="objet"]', '.formulaire_editer_associe_lien').change(
 			function(){
-				var lien_interne = $('#champ_lien_interne').val();
+				var lien_interne = $('input:radio[name="lien_interne"]').val();
+				console.log(lien_interne);
 				ajaxReload('champ_objet', {
 					args:{
 						objet:$(this).val(),
