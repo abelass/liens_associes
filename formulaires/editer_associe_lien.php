@@ -102,7 +102,6 @@ function formulaires_editer_associe_lien_charger_dist($id_associe_lien= 'new', $
  *     Tableau des erreurs
  */
 function formulaires_editer_associe_lien_verifier_dist($id_associe_lien = 'new', $retour = '', $associer_objet = '', $lier_trad = 0, $config_fonc = '', $row = array(), $hidden = '') {
-	$verifier = charger_fonction('verifier', 'inc/');
 	$erreurs = array();
 
 	$erreurs = formulaires_editer_objet_verifier('associe_lien', $id_associe_lien, array('titre'));
@@ -117,17 +116,18 @@ function formulaires_editer_associe_lien_verifier_dist($id_associe_lien = 'new',
 	}
 	else {
 		if($url = _request('url')) {
-			$erreurs['url'] = $verifier($url , 'url', array(
+			$verifier = charger_fonction('verifier', 'inc/');
+			if($erreur = $verifier($url , 'url', array(
 				'mode' => 'php_filter',
-				'type_protocole' => 'web'
-			));
-
+				'type_protocole' => 'web'))) {
+				$erreurs['url'] = $erreur;
+			}
 		}
 		else {
 			$erreurs['url'] = _T("info_obligatoire");
 		}
 	}
-
+print_r($erreurs);
 	return $erreurs;
 }
 

@@ -21,7 +21,7 @@
 				label=<:associe_lien:champ_titre_label:>})]
 
 
-			[(#SAISIE{input, url,
+			[(#SAISIE{url, url,
 				label=<:associe_lien:champ_url_label:>})]
 
 			[(#SAISIE{textarea, descriptif,
@@ -61,33 +61,35 @@
 	// Chagement du type de lien.
 	$('input:radio[name="lien_interne"]', '.formulaire_editer_associe_lien').change(
 		function(){
+			var objet = $('#champ_objet').val();
 				if ($(this).val() == '') {
-					hide_field([".editer_objet",".editer_id_objet"]);
+					hide_field([".editer_objet"]);
 					show_field([".editer_url"]);
 				}
 				else {
 					hide_field([".editer_url"]);
 					show_field([".editer_objet"]);
 				}
+				// R
+				ajaxReload('champ_objet', {
+					args:{
+						objet:objet,
+						lien_interne: $(this).val()
+					},
+				});
 		}
 	);
 
 	// Changement de l'objet.
 	$('select[name="objet"]', '.formulaire_editer_associe_lien').change(
 			function(){
-				if ($(this).val() != '') {
-					show_field([".editer_id_objet"]);
-					// Reload le squellette pour que le autocimplete aie le bone objet.
-					ajaxReload('champ_objet', {
-						args:{
-							objet:$(this).val(),
-							lien_interne: 'on'
-						},
-					});
-				}
-				else {
-					hide_field([".editer_id_objet"]);
-				}
+				var lien_interne = $('#champ_lien_interne').val();
+				ajaxReload('champ_objet', {
+					args:{
+						objet:$(this).val(),
+						lien_interne: lien_interne
+					},
+				});
 			}
 		);
 
