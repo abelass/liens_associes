@@ -39,12 +39,13 @@
 <script type="text/javascript">
 
 	// Show hide fields
-	if($('input:radio[name="lien_interne"]:checked', '.formulaire_editer_assoccie_lien form').val() == 'on') {
+	if($('input:radio[name="lien_interne"]:checked', '.formulaire_editer_associe_lien').val() == 'on') {
+
 		hide_field([".editer_url"]);
 		show_field([".editer_objet"]);
 	}
 	else {
-		hide_field([".editer_objet",".editer_id_objet"]);
+		hide_field([".editer_objet"]);
 		show_field([".editer_url"]);
 	}
 
@@ -58,7 +59,7 @@
 
 
 	// Chagement du type de lien.
-	$('input:radio[name="lien_interne"]').change(
+	$('input:radio[name="lien_interne"]', '.formulaire_editer_associe_lien').change(
 		function(){
 				if ($(this).val() == '') {
 					hide_field([".editer_objet",".editer_id_objet"]);
@@ -72,7 +73,7 @@
 	);
 
 	// Changement de l'objet.
-	$('select[name="objet"]').change(
+	$('select[name="objet"]', '.formulaire_editer_associe_lien').change(
 			function(){
 				if ($(this).val() != '') {
 					show_field([".editer_id_objet"]);
@@ -106,6 +107,7 @@
 		jQuery.each(fields, function(index, field) {
 			$(field).show(speed);
 			$(field +' input').prop('required','true');
+			$(field + ' > label span').replaceWith('');
 			$(field + ' > label').append('<span class="obligatoire"> <:info_obligatoire_02:></span>');
 			$(field).addClass('obligatoire');
 		});
