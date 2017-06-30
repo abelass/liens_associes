@@ -11,11 +11,11 @@
 				label=<:associe_lien:champ_lien_interne_label:>,
 				explication=<:associe_lien:champ_lien_interne_explication:> })]
 
-			[(#SAISIE{choisir_objet, objet,
-				label=<:associe_lien:champ_objet_label:>,
-				explication=<:associe_lien:champ_objet_explication:> })]
+			[(#SAISIE{choisir_objet, objet_spip,
+				label=<:associe_lien:champ_objet_spip_label:>,
+				explication=<:associe_lien:champ_objet_spip_explication:> })]
 
-			<INCLURE{fond=formulaires/inc-editer_associe_lien_champ_objet,ajax=champ_objet,env}/>
+			<INCLURE{fond=formulaires/inc-editer_associe_lien_champ_id_objet_spip,ajax=champ_id_objet_spip,env,objet_spip}/>
 
 			[(#SAISIE{input, titre, obligatoire=oui,
 				label=<:associe_lien:champ_titre_label:>})]
@@ -42,38 +42,38 @@
 	if($('input:radio[name="lien_interne"]:checked', '.formulaire_editer_associe_lien').val() == 'on') {
 
 		hide_field([".editer_url"]);
-		show_field([".editer_objet"]);
+		show_field([".editer_objet_spip"]);
 	}
 	else {
-		hide_field([".editer_objet"]);
+		hide_field([".editer_objet_spip"]);
 		show_field([".editer_url"]);
 	}
 
-	if($("select#champ_objet").val() != '') {
-		show_field([".editer_id_objet"]);
+	if($("select#champ_objet_spip").val() != '') {
+		show_field([".editer_id_objet_spip"]);
 
 	}
 	else {
-		hide_field([".editer_id_objet"]);
+		hide_field([".editer_id_objet_spip"]);
 	}
 
 
 	// Chagement du type de lien.
 	$('input:radio[name="lien_interne"]', '.formulaire_editer_associe_lien').change(
 		function(){
-			var objet = $('#champ_objet').val();
+			var objet = $('#champ_objet_spip').val();
 				if ($(this).val() == '') {
-					hide_field([".editer_objet"]);
+					hide_field([".editer_objet_spip"]);
 					show_field([".editer_url"]);
 				}
 				else {
 					hide_field([".editer_url"]);
-					show_field([".editer_objet"]);
+					show_field([".editer_objet_spip"]);
 				}
 				// R
-				ajaxReload('champ_objet', {
+				ajaxReload('champ_id_objet_spip', {
 					args:{
-						objet:objet,
+						objet_spip:objet,
 						lien_interne: $(this).val()
 					},
 				});
@@ -81,13 +81,13 @@
 	);
 
 	// Changement de l'objet.
-	$('select[name="objet"]', '.formulaire_editer_associe_lien').change(
+	$('select[name="objet_spip"]', '.formulaire_editer_associe_lien').change(
 			function(){
 				var lien_interne = $('input:radio[name="lien_interne"]').val();
 				console.log(lien_interne);
-				ajaxReload('champ_objet', {
+				ajaxReload('champ_id_objet_spip', {
 					args:{
-						objet:$(this).val(),
+						objet_spip:$(this).val(),
 						lien_interne: lien_interne
 					},
 				});

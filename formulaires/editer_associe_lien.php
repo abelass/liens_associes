@@ -107,7 +107,7 @@ function formulaires_editer_associe_lien_verifier_dist($id_associe_lien = 'new',
 	$erreurs = formulaires_editer_objet_verifier('associe_lien', $id_associe_lien, array('titre'));
 
 	if (_request('lien_interne')) {
-		$obligatoires = array('objet','id_objet');
+		$obligatoires = array('objet_spip','id_objet_spip');
 		foreach ($obligatoires as $champ) {
 			if (!_request($champ)){
 				$erreurs[$champ] = _T("info_obligatoire");

@@ -34,16 +34,16 @@ function liens_associes_affiche_milieu($flux) {
 	include_spip('inc/config');
 	$texte = "";
 	$e = trouver_objet_exec($flux['args']['exec']);
-	
+
 	// Liens associés sur les objets choisies
-	if (! $e['edition'] and in_array($e['table_objet_sql'], array_filter(lire_config('liens_associes/objets', array ())))) {
+	if (!$e['edition'] and in_array($e['table_objet_sql'], array_filter(lire_config('liens_associes/objets', array ())))) {
 		$texte .= recuperer_fond('prive/objets/editer/liens', array (
 			'table_source' => 'associe_liens',
 			'objet' => $e['type'],
 			'id_objet' => $flux['args'][$e['id_table_objet']]
 		));
 	}
-	
+
 	if ($texte) {
 		if ($p = strpos($flux['data'], '<!--affiche_milieu-->')) {
 			$flux['data'] = substr_replace($flux['data'], $texte, $p, 0);
@@ -51,7 +51,7 @@ function liens_associes_affiche_milieu($flux) {
 			$flux['data'] .= $texte;
 		}
 	}
-	
+
 	return $flux;
 }
 
@@ -63,7 +63,7 @@ function liens_associes_jqueryui_plugins($scripts){
 	if (_request('exec')) {
 		$scripts[] = "jquery.ui.autocomplete";
 	}
-	
+
 	return $scripts;
 }
 
@@ -79,11 +79,11 @@ function liens_associes_jqueryui_plugins($scripts){
  * @return array       Données du pipeline
  */
 function liens_associes_optimiser_base_disparus($flux) {
-	
+
 	include_spip('action/editer_liens');
 	$flux['data'] += objet_optimiser_liens(array('associe_lien'=>'*'), '*');
-	
+
 	sql_delete('spip_associe_liens', "statut='poubelle' AND maj < " . $flux['args']['date']);
-	
+
 	return $flux;
 }
