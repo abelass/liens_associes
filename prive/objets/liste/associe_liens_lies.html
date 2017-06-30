@@ -32,8 +32,9 @@ a mis a jour la valeur avec la page reelle]
 		[<tr><td colspan="4"><p class="pagination">(#GET{p})</p></td></tr>]
 
 		<tr class="first_row">
-			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th> 
+			<th class="statut" scope="col">[(#TRI{statut,<span title="<:lien_trier_statut|attribut_html:>">#</span>,ajax})]</th>
 			<th class="titre" scope="col">[(#TRI{multi titre,<:associe_lien:champ_titre_label:>,ajax})]</th>
+			<th class="url" scope="col"><:associe_lien:champ_url_label:></th>
 			<th class="action" scope="col"></th>
 		</tr>
 	</thead>
@@ -41,9 +42,9 @@ a mis a jour la valeur avec la page reelle]
 	<BOUCLE_liste_associe_liens(ASSOCIE_LIENS){id_associe_lien IN #GET{selection}}{statut?}
 		{tri #ENV{par,multi titre},#GET{defaut_tri}}{pagination #ENV{nb,10} assl}>
 		<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})][ (#EXPOSE|unique)][ (#TITRE**|extraire_multi|initiale|=={#ENV{i}}|?{on}|unique)][(#ID_ASSOCIE_LIEN|=={#ENV{id_lien_ajoute}}|oui)append]">
-			<td class="statut">[(#STATUT|puce_statut{associe_lien})]</td> 
+			<td class="statut">[(#STATUT|puce_statut{associe_lien})]</td>
 			<td class="titre">[(#LOGO_ASSOCIE_LIEN|image_reduire{20,20})]<a href="[(#ID_ASSOCIE_LIEN|generer_url_entite{associe_lien})]">#TITRE</a></td>
-
+			<td class="url">#URL_LIEN_ASSOCIE</td>
 			<td class="action">
 				[(#ENV{editable}|oui)
 					<button type="submit" class="button link delete" name="supprimer_lien\[associe_lien-#ID_ASSOCIE_LIEN-#OBJET-#ID_OBJET\]" value="X"><:associe_lien:retirer_lien_associe_lien:> [(#CHEMIN_IMAGE{supprimer-12.png}|balise_img{'X'})]</button>
