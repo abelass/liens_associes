@@ -44,8 +44,7 @@
 	<BOUCLE_listeobjets(spip_associe_liens_liens){id_associe_lien}{fusion objet}{par objet}>
 		#SET{table,#OBJET|table_objet}
 		[(#SET{titre,[#OBJET:info_(#GET{table})_liees_associe_lien]})]
-		[(#SET{liste,#VAL{prive/objets/liste/#GET{table}}|trouver_fond|?{#GET{table},objets_lies_associe_lien}})]
-		<INCLURE{fond=prive/objets/liste/#GET{liste},objet,id_associe_lien,ajax,env} />
+		<INCLURE{fond=prive/objets/liste/objets_lies_associe_lien,objet,id_associe_lien,ajax,env} />
 	</BOUCLE_listeobjets>
 </div>
 
