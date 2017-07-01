@@ -2,21 +2,15 @@
 	prefix="liens_associes"
 	categorie="divers"
 	version="1.0.0"
-	etat="dev"
+	etat="test"
 	compatibilite="[3.1.6;3.1.*]"
 	logo="prive/themes/spip/images/liens_associes-64.png"
 	documentation=""
 	schema="1.0.0"
 >
-	<!--
-		Paquet généré le 2017-06-26 15:11:02
-		(Vous pouvez bien entendu supprimer ces commentaires)
-	-->
 
 	<nom>Liens associés</nom>
-	<!-- Gérer les liens associés -->
 
-	<!-- cette balise peut être présente plusieurs fois s'il y a plusieurs auteurs -->
 	<auteur lien='https://websimple.be'>Rainer</auteur>
 
 	<licence>GNU/GPL</licence>
