@@ -8,7 +8,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// L
-	'label_lier_objets' => 'Associer des liens avec :',
+	'label_lier_objets' => 'Objets pour lesquels les Liens associés seront proposé :',
 	'liens_associes_titre' => 'Liens associés',
 
 	// C
